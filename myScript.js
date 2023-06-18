@@ -40,14 +40,10 @@ class Queue {
 let q = new Queue();
 
 
-function myFunction() {
-  document.getElementById("demo").innerHTML = "Paragraph chan VwV";
-}
-
-
 function setValue(id, newValue) {
   document.getElementById(id).innerHTML = newValue;
 }
+
 
 function ticketFactory(someForm){
 var out = '';
@@ -64,13 +60,14 @@ function makeTicket(someForm){
   let x = new Ticket(someForm.elements[0].value, someForm.elements[1].value, someForm.elements[2].value);
   q.enqueue(x);
   someForm.reset();
+  alert("You Have Been Added to the Line");
 }
 
-
-
+// only here for test purposes
 function makeTicketDeprecated(studentName, studentID, department){
   let x = new Ticket(studentName, studentID, department);
   q.enqueue(x);
+  alert("You Have Been Added to the Line");
 }
 
 
