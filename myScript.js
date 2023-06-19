@@ -96,9 +96,55 @@ function peekTicket(){
   alert(x.studentName + " " + x.studentID + " " + x.department);
 }
 
+function makeTicketLocal(someForm){
+  let x = [someForm.elements[0].value, someForm.elements[1].value, someForm.elements[2].value];
+  sessionStorage.setItem("name", x[0])
+  sessionStorage.setItem("dept", x[1])
+  sessionStorage.setItem("id", x[2])
+  alert("You Have Been Added to the (local) Line");
+}
+
+function printTicketLocal(){
+  setValue("demo1", sessionStorage.getItem("name") );
+  setValue("demo2", sessionStorage.getItem("dept"));
+  setValue("demo3", sessionStorage.getItem("id"));
+  console.log("printed local ticket")
+}
 
 
+// server interactions area
+function sendGetRequest() {
+  fetch('/').then(response => response.text())
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
+}
 
+function sendPostRequest() {
+  fetch('/', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: 'data=Hello from JavaScript!',
+  })
+  .then(response => response.json())
+  .then(data => {
+      console.log(data.result);
+      // Process the returned data as needed
+  })
+  .catch(error => console.error(error));
+}
 
+function getTheTicket(){
+  fetch('http://127.0.0.1:5000')
+  .then(response => response.json())
+  .then(data => {
+    setValue("demo1", data.name);
+    setValue("demo2", data.dept);
+    setValue("demo3", data.id);
+    console.log("printed fetch ticket");
+  })
+  .catch(error => console.error(error))
 
+}
 

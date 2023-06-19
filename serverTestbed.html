@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <p id="demo1"></p>
+    <p id="demo2"></p>
+    <p id="demo3"></p>
+    <br>
+
+
+    <button onclick="sendGetRequest()">Send GET Request</button>
+    <button onclick="sendPostRequest(5)">Send POST Request</button>
+
+    <script>
+        function sendGetRequest() {
+            fetch("http://127.0.0.1:5000").then(response => response.text())
+                .then(data => console.log(data))
+                .catch(error => console.error(error));
+        }
+
+        function sendPostRequest() {
+            fetch("http://127.0.0.1:5000", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'data=Hello from JavaScript!',
+            })
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+        }
+    </script>
+    <script src="myScript.js"></script>
+
+
+    <br>
+    <form action="http://127.0.0.1:5000">
+      <label for="fname">First name:</label><br>
+      <input type="text" id="fname" name="fname" value="John"><br>
+      <label for="lname">Last name:</label><br>
+      <input type="text" id="lname" name="lname" value="Doe"><br><br>      
+      <input type="submit" value="Submit">
+    </form>
+
+    <form action="http://127.0.0.1:5000" method = "post">
+        <label for="type">Type:</label><br>
+        <input type="text" id="type" name="type" value="add"><br>
+
+        <label for="studentName">Student Name:</label><br>
+        <input type="text" id="studentName" name="studentName"><br>
+
+        <label for="department">Department:</label><br>
+        <input type="text" id="department" name="department"><br>
+
+        <label for="studentID">Student ID:</label><br>
+        <input type="text" id="studentID" name="studentID"><br><br>
+
+        <input type="submit" value="Submit Data">
+    </form>
+
+    <form action="http://127.0.0.1:5000" method = "post">
+        <label for="type">Type:</label><br>
+        <input type="text" id="type" name="type" value="print"><br>
+
+        <input type="submit" value="Submit Print Request form">
+    </form>
+ 
+    <button onclick="getTheTicket()">Send Print Request, function</button>
+
+
+
+</body>
+</html>
