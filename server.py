@@ -1,9 +1,10 @@
 import queue
 import json
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app)
 
 q = queue.Queue()
 
@@ -15,30 +16,29 @@ def add_ticket(request):
     return "The ticket has been added."
 
 def print_ticket(request):
-    x = q.get()
-    json_string = json.dumps(x)
-    return "The ticket has been popped" + json_string
+    if  q.empty():
+        return "There is no Ticket"
+    else:    
+        return q.get()
 
 
 @app.route('/', methods=['GET', 'POST'])
 def handle_requests():
     if request.method == 'GET':
-        # Handle GET request
-        return 'This is a GET request.'
+        z = print_ticket(request)
+        return jsonify({'result': z})
     elif request.method == 'POST':
         # Handle POST request
         type = request.form.get('type')
         # Process the data
         result = process_data(request, type)
-        return jsonify({'result': result})
-
+        return jsonify(result)
+#{'result': result}
 def process_data(request, type):    
     if (type == "print"):        
-        x = print_ticket(request)
-        return x
+        return print_ticket(request)
     elif (type == "add"):
-        x = add_ticket(request)       
-        return x
+        return add_ticket(request)      
     else:
         return "bad boys, bad boys..." 
     

@@ -5,7 +5,10 @@
 
 <h2>Ticket Form</h2>
 
-<form>
+<form action="http://127.0.0.1:5000" method = "post">
+  <label for="type">Type:</label><br>
+  <input type="text" id="type" name="type" value="add"><br>
+
   <label for="studentName">Student Name:</label><br>
   <input type="text" id="studentName" name="studentName"><br>
 
@@ -15,27 +18,16 @@
   <label for="studentID">Student ID:</label><br>
   <input type="text" id="studentID" name="studentID"><br><br>
 
-  <button type="button" onclick="makeTicket(this.form)">Submit Ticket</button>
+  <input type="submit" value="Submit Data">
 </form>
-
 
 
 <script src="myScript.js"></script>
 <link href="style.css" rel="stylesheet">
 
-<br><br>
-<form>
-  <label for="studentName">Student Name:</label><br>
-  <input type="text" id="studentName" name="studentName"><br>
 
-  <label for="department">Department:</label><br>
-  <input type="text" id="department" name="department"><br>
 
-  <label for="studentID">Student ID:</label><br>
-  <input type="text" id="studentID" name="studentID"><br><br>
 
-  <button type="button" onclick="makeTicketLocal(this.form)">Submit Local Ticket</button>
-</form>
 
 
 </body>

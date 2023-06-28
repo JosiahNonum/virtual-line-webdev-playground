@@ -8,6 +8,7 @@ class Ticket{
   }
 }
 
+/*
 // credit for this template goes to https://www.javascripttutorial.net/javascript-queue/
 class Queue {
   constructor() {
@@ -40,9 +41,7 @@ class Queue {
 let q = new Queue();
 
 
-function setValue(id, newValue) {
-  document.getElementById(id).innerHTML = newValue;
-}
+
 
 
 function ticketFactory(someForm){
@@ -86,15 +85,6 @@ function printTicket(){
 }
 
 
-// gives the next tickets info in a pop-up without destroying it
-function peekTicket(){
-  if (q.isEmpty){
-    alert("There is no ticket to display.");
-    return}
-  
-  let x = q.peek();
-  alert(x.studentName + " " + x.studentID + " " + x.department);
-}
 
 function makeTicketLocal(someForm){
   let x = [someForm.elements[0].value, someForm.elements[1].value, someForm.elements[2].value];
@@ -133,18 +123,54 @@ function sendPostRequest() {
       // Process the returned data as needed
   })
   .catch(error => console.error(error));
-}
 
-function getTheTicket(){
-  fetch('http://127.0.0.1:5000')
+  function getTheTicket(){
+  fetch('http://127.0.0.1:5000', {method: 'POST', mode: 'no-cors', body: 'type=print' })
   .then(response => response.json())
   .then(data => {
     setValue("demo1", data.name);
     setValue("demo2", data.dept);
     setValue("demo3", data.id);
     console.log("printed fetch ticket");
-  })
-  .catch(error => console.error(error))
+  })  
+  .catch(error => console.error(error));
+}
 
+*/
+
+// defining the path to the python server
+let api_url = 'http://127.0.0.1:5000'
+
+
+// getting the ticket at the front of the queue from the python server
+async function getText(){
+  const response = await fetch(api_url);
+  let data = await response.json();
+  console.log(data);
+  setValue("demo1", data.result.name);
+  setValue("demo2", data.result.department);
+  setValue("demo3", data.result.id);
+  console.log("printed fetch ticket");
+
+  console.log(data.result.name); 
+  console.log(data.result.department); 
+  console.log(data.result.id);
+}
+
+// changes the content of a <p> tag
+function setValue(id, newValue) {
+  document.getElementById(id).innerHTML = newValue;
+}
+
+
+
+// gives the next tickets info in a pop-up without destroying it
+function peekTicket(){
+  if (q.isEmpty){
+    alert("There is no ticket to display.");
+    return}
+  
+  let x = q.peek();
+  alert(x.studentName + " " + x.studentID + " " + x.department);
 }
 
