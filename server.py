@@ -20,6 +20,13 @@ def print_ticket(request):
         return "There is no Ticket"
     else:    
         return q.get()
+    
+def peek_ticket(request):
+    if  q.empty():
+        return "There is no Ticket"
+    else:    
+        return q.queue[0]
+
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -32,15 +39,15 @@ def handle_requests():
         type = request.form.get('type')
         # Process the data
         result = process_data(request, type)
-        return jsonify(result)
-#{'result': result}
+        return jsonify({'result': result})
+
 def process_data(request, type):    
     if (type == "print"):        
         return print_ticket(request)
     elif (type == "add"):
         return add_ticket(request)      
     else:
-        return "bad boys, bad boys..." 
+        return peek_ticket(request)
     
 
 if __name__ == '__main__':

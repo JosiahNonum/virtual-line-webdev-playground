@@ -147,14 +147,16 @@ async function getText(){
   const response = await fetch(api_url);
   let data = await response.json();
   console.log(data);
+  if (data.result == "There is no Ticket"){
+    alert("There is no ticket to display.");
+    setValue("demo1", "");
+    setValue("demo2", "");
+    setValue("demo3", "");
+    return}    
   setValue("demo1", data.result.name);
   setValue("demo2", data.result.department);
   setValue("demo3", data.result.id);
   console.log("printed fetch ticket");
-
-  console.log(data.result.name); 
-  console.log(data.result.department); 
-  console.log(data.result.id);
 }
 
 // changes the content of a <p> tag
@@ -163,14 +165,17 @@ function setValue(id, newValue) {
 }
 
 
-
 // gives the next tickets info in a pop-up without destroying it
-function peekTicket(){
-  if (q.isEmpty){
-    alert("There is no ticket to display.");
-    return}
+async function peekTicket(){
+  const response = await fetch(api_url, {method:"post"});
+  let data = await response.json();
+  console.log(data);
+
   
-  let x = q.peek();
-  alert(x.studentName + " " + x.studentID + " " + x.department);
+
+  if (data.result == "There is no Ticket"){
+    alert("There is no ticket to display.");
+    return}    
+  alert(data.result.name + " " + data.result.id + " " + data.result.department);
 }
 
