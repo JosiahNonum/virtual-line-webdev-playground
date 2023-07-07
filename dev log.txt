@@ -1,0 +1,11 @@
+Started with the virtual queue idea, and quickly threw it together in C++. I wanted a GUI instead of just a console envirnment, and decided to implement it using a web app. The alternative would be something like Unity.
+
+Started with just a single HTML page, with a JavaScript backend handling form intake, storage, and display. Once I got that working I moved on to a multipage application. 
+
+Tried several different approaches, before deciding to use a Python/Flask server as the backend. Took quite a bit of fiddling to get it to work. The biggest issue I encountered was getting HTTP to work.
+
+After I had learned what I needed to of HTTP, I had the ability to enter information on one HTML page, pass it to the Python server, and than retrieve that information and display it on another HTML page.
+
+I took a short detour and wrote some CSS to make everything look a little better.
+
+now time to deploy it to AZURE
